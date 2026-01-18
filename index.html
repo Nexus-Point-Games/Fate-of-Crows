@@ -3,39 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fate of Crows | Strategic Utility</title>
+    <title>Fate of Crows</title>
     <style>
-        body { background-color: #0a0a0a; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
-        .container { text-align: center; border: 1px solid #333; padding: 40px; background: #111; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        h1 { color: #888; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
-        p { color: #666; font-size: 0.9em; margin-bottom: 30px; }
-        .btn { display: inline-block; padding: 15px 30px; border: 1px solid #444; color: #888; text-decoration: none; transition: 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
-        .btn:hover { background: #222; color: #fff; border-color: #888; }
-        /* The Hidden Gate */
-        #whale-gate { position: fixed; bottom: 10px; right: 10px; width: 20px; height: 20px; cursor: default; opacity: 0.05; background: #222; }
+        body {
+            background-color: #0a0a0a;
+            color: #d4af37;
+            font-family: 'Times New Roman', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            transition: background 2s;
+        }
+
+        #gate-container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 10px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            animation: flicker 4s infinite;
+        }
+
+        /* The Secret Square - Made it larger (40px) and fixed position */
+        #secret-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            cursor: crosshair;
+            z-index: 1000;
+        }
+
+        #secret-trigger:hover {
+            background: rgba(212, 175, 55, 0.05); /* Very faint glow when you find it */
+        }
+
+        #ledger {
+            display: none;
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid #d4af37;
+            padding: 20px;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0 0 30px #000;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.5; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Fate of Crows</h1>
-        <p>Operational Utility Mod v0.1 | No Trace. No Noise.</p>
-        <a href="#" class="btn" id="download-link">Download Mod</a>
+
+    <div id="gate-container">
+        <h1>FATE OF CROWS</h1>
     </div>
 
-    <div id="whale-gate" onclick="revealSecret()"></div>
+    <div id="ledger">
+        <h2>THE SILENT LEDGER</h2>
+        <hr color="#d4af37">
+        <p><em>"The eye sees what the gold hides."</em></p>
+        <div id="auction-items">
+            <p>Scanning for active bids...</p>
+        </div>
+    </div>
+
+    <div id="secret-trigger" onclick="unlockLedger()"></div>
 
     <script>
-        function revealSecret() {
-            const pass = prompt("Verification Required:");
-            if (pass === "crow") {
-                alert("Accessing Shadow Ledger... Welcome back, Visioneer.");
-                // We will add the bidding logic here later
+        function unlockLedger() {
+            const pass = prompt("Identify yourself:");
+            if (pass && pass.toLowerCase() === "crow") {
+                document.getElementById('gate-container').style.display = 'none';
+                document.getElementById('ledger').style.display = 'block';
+                document.body.style.background = "#1a1a1a";
+                alert("Access Granted. Welcome to the Ledger.");
+            } else {
+                alert("The crows see nothing.");
             }
         }
-        document.getElementById('download-link').onclick = function() {
-            alert("Mod file sync initiated. Check repository releases.");
-        };
     </script>
 </body>
 </html>
- 
